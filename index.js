@@ -9,6 +9,25 @@ const cors = require('cors')
 const crypto = require('crypto');
 const pkg = require('./package.json');
 
+// partial code in app.js
+const appSettings = {
+    appCredentials: {
+        clientId: process.env.WEBSITE_AUTH_CLIENT_ID, // Enter the client Id here,
+        tenantId: "common", // Enter the tenant info here,
+        clientSecret: process.env.MICROSOFT_PROVIDER_AUTHENTICATION_SECRET // Enter the client secret here,
+    },
+    authRoutes: {
+        redirect: "/.auth/login/aad/callback", // Enter the redirect URI here
+        error: "/error", // enter the relative path to error handling route
+        unauthorized: "/unauthorized" // enter the relative path to unauthorized route
+    },
+    protectedResources: {
+        graphAPI: {
+            endpoint: "https://graph.microsoft.com/v1.0/me", // resource endpoint
+            scopes: ["User.Read"] // resource scopes
+        },
+    },
+}
 
 // App constants
 const port = process.env.PORT || 3000;
